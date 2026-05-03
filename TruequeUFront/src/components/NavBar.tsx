@@ -4,15 +4,10 @@ function Navbar() {
   return (
     <nav style={styles.nav}>
       <div style={styles.logo}>
-        <Link 
-          to="/" 
-          style={{ 
-            color: "#ffffff", 
-            textDecoration: "none" 
-          }}
-        >
-          TruequeU
-        </Link>
+      <Link to="/" style={styles.logoLink}>
+        <img src="/logo.png" alt="logo" style={styles.logoImg} />
+        <span>TruequeU</span>
+      </Link>
     </div>
 
       <ul style={styles.menu}>
@@ -87,6 +82,19 @@ const styles = {
     textDecoration: "none",
     fontWeight: "500",
   },
+  logoLink: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    textDecoration: "none",
+    color: "#ffffff",
+  },
+
+  logoImg: {
+    width: "38px",
+    height: "38px",
+    objectFit: "contain",
+  } as React.CSSProperties,
 };
 
 const navLinkStyle = ({ isActive }: { isActive: boolean }) => ({
@@ -95,8 +103,4 @@ const navLinkStyle = ({ isActive }: { isActive: boolean }) => ({
   transition: "color 0.2s",
 });
 
-const linkStyle = {
-  textDecoration: "none",
-  color: "#ffffff",
-};
 export default Navbar;
