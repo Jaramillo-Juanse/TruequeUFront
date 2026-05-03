@@ -2,12 +2,6 @@ function Footer() {
   return (
     <footer style={styles.footer}>
       <p>© {new Date().getFullYear()} TruequeU</p>
-
-      <div style={styles.links}>
-        <a href="#">Términos</a>
-        <a href="#">Privacidad</a>
-        <a href="#">Contacto</a>
-      </div>
     </footer>
   );
 }
@@ -15,10 +9,12 @@ function Footer() {
 const styles = {
   footer: {
     padding: "1rem",
-    borderTop: "1px solid #ccc",
+    borderTop: "1px solid #cccccc",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    backgroundColor: "#111827", 
+    color: "#ffffff",  
   },
   links: {
     display: "flex",
