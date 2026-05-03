@@ -4,8 +4,16 @@ function Navbar() {
   return (
     <nav style={styles.nav}>
       <div style={styles.logo}>
-        <Link to="/">TruequeU</Link>
-      </div>
+        <Link 
+          to="/" 
+          style={{ 
+            color: "#ffffff", 
+            textDecoration: "none" 
+          }}
+        >
+          TruequeU
+        </Link>
+    </div>
 
       <ul style={styles.menu}>
         <li>
@@ -34,8 +42,8 @@ function Navbar() {
       </ul>
 
       <div style={styles.auth}>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        <Link to="/login" style={styles.loginLink}>Login</Link>
+        <Link to="/register" style={styles.registerBtn}>Register</Link>
       </div>
     </nav>
   );
@@ -47,10 +55,13 @@ const styles = {
     alignItems: "center",
     padding: "1rem 2rem",
     borderBottom: "1px solid #ccc",
+    backgroundColor: "#111827", 
+    color: "#ffffff", 
   },
   logo: {
     fontWeight: "bold",
     fontSize: "1.2rem",
+    color: "#e5e7eb", 
   },
   menu: {
     display: "flex",
@@ -58,13 +69,34 @@ const styles = {
     listStyle: "none",
   },
   auth: {
-    display: "flex",
-    gap: "1rem",
+  display: "flex",
+  gap: "0.8rem",
+  alignItems: "center",
+  },
+
+  loginLink: {
+    color: "#e5e7eb",
+    textDecoration: "none",
+  },
+
+  registerBtn: {
+    backgroundColor: "#4f46e5",
+    color: "#ffffff",
+    padding: "0.4rem 0.9rem",
+    borderRadius: "0.5rem",
+    textDecoration: "none",
+    fontWeight: "500",
   },
 };
 
 const navLinkStyle = ({ isActive }: { isActive: boolean }) => ({
   textDecoration: "none",
-  color: isActive ? "blue" : "black",
+  color: isActive ? "#60a5fa" : "#ffffff",
+  transition: "color 0.2s",
 });
+
+const linkStyle = {
+  textDecoration: "none",
+  color: "#ffffff",
+};
 export default Navbar;
