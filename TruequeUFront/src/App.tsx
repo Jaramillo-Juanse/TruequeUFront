@@ -9,6 +9,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Favorites from "./pages/Favorites";
 import Chat from "./pages/Chat";
 import NotFoundPage from "./pages/NotFound";
+import CreateListing from "./pages/CreateListing";
 
 function App(){
   return (
@@ -22,6 +23,7 @@ function App(){
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/publish" element={<CreateListing />} />
           <Route path='*' element={<NotFoundPage></NotFoundPage>}></Route>
         </Route>
       </Routes>

@@ -1,9 +1,8 @@
 import ListingCard from "./ListingCard";
 import { EmptyState } from "../ui/EmptyState";
+import type { Listing } from "../../types/types";
 
-type Props = {
-  listings: { id: number; title: string }[];
-};
+type Props = { listings: Listing[] };
 
 export default function ListingList({ listings }: Props) {
   if (!listings.length) return <EmptyState />;
