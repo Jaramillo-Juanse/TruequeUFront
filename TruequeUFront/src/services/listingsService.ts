@@ -6,9 +6,14 @@ export async function getListings(): Promise<Listing[]> {
   return mockListings;
 }
 
-export async function getListingById(id: string): Promise<Listing | undefined> {
+export async function getListingById(
+  id: string
+): Promise<Listing | undefined> {
   await new Promise((r) => setTimeout(r, 300));
-  return mockListings.find((item) => item.id === id);
+
+  return mockListings.find(
+    (item) => String(item.id) === String(id)
+  );
 }
 
 export async function createListing(data: Omit<Listing, "id" | "createdAt">): Promise<Listing> {

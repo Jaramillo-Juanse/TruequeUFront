@@ -2,10 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav style={styles.nav}>
+    <nav style={styles.nav} aria-label="Navegación principal">
       <div style={styles.logo}>
       <Link to="/" style={styles.logoLink}>
-        <img src="/logo.png" alt="logo" style={styles.logoImg} />
+        <img src="/logo.png" alt="Logo de TruequeU" style={styles.logoImg} />
         <span>TruequeU</span>
       </Link>
     </div>

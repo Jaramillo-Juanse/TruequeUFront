@@ -19,21 +19,25 @@ export default function Register() {
     try {
       await register({ email, password });
       navigate("/listings");
-    } catch (err: any) {
-      setError(err.message || "Error al registrarse");
-    }
+    } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Error al registrarse");
+        }
+      }
     setLoading(false);
   }
 
   return (
-    <main className="max-w-sm mx-auto mt-16 p-6">
+    <section className="max-w-sm mx-auto mt-16 p-6">
       <h1 className="text-2xl font-bold mb-6 text-center">Crear cuenta</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Correo" />
         <Input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" />
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <Button onClick={() => {}}>{loading ? "Cargando..." : "Registrarse"}</Button>
+        <Button type="submit" disabled={loading}>
       </form>
-    </main>
+    </section>
   );
 }

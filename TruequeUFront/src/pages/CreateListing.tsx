@@ -50,7 +50,7 @@ export default function CreateListing() {
   }
 
   return (
-    <main className="p-6 max-w-lg mx-auto">
+    <section className="p-6 max-w-lg mx-auto">
       <h1 className="text-2xl font-bold mb-6">Publicar producto</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -64,6 +64,6 @@ export default function CreateListing() {
           {loading ? "Publicando..." : "Publicar"}
         </Button>
       </form>
-    </main>
+    </section>
   );
 }

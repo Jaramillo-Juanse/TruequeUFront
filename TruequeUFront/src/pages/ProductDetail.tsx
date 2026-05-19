@@ -24,7 +24,7 @@ export default function ProductDetail() {
   }, [id]);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorState />;
+  if (error || !product) return <ErrorState />;
 
   return (
     <section className="max-w-xl mx-auto p-6">
