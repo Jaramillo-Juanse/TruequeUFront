@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://localhost:7119/api";
 
 export async function request<T>(
   endpoint: string,

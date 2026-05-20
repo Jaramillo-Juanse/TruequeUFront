@@ -11,14 +11,13 @@ export async function getListingById(id: string): Promise<Listing | undefined> {
   return mockListings.find((item) => item.id === id);
 }
 
-export async function createListing(data: Omit<Listing, "id" | "createdAt">): Promise<Listing> {
-  await new Promise((r) => setTimeout(r, 400));
-  const nuevo: Listing = {
-    ...data,
-    id: String(Date.now()),
-    createdAt: new Date().toISOString(),
-    images: [],
-  };
-  mockListings.push(nuevo);
-  return nuevo;
+export function createListing(data: Partial<Listing>) {
+  const token = localStorage.getItem("token");
+  return request<Listing>("/listings", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
 }

@@ -37,9 +37,9 @@ export default function CreateListing() {
         condition: form.condition,
         price: Number(form.price),
         location: form.location,
-        userId: "u1",
+        userId: JSON.parse(atob(localStorage.getItem("token")!.split(".")[1])).sub,
         isHidden: false,
-        state: "disponible",
+        state: "Available",
       });
       navigate("/listings");
     } catch {
