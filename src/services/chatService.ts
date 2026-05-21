@@ -1,14 +1,54 @@
-import { mockChats } from "./mockData";
+import { request } from "./api";
+import type {
+  Chat,
+  Message,
+} from "../types/types";
 
-export async function getChats() {
-  await new Promise((r) => setTimeout(r, 500));
-  return mockChats;
+// =========================
+// INICIAR CHAT
+// =========================
+export function startChat(
+  listingId: string
+) {
+  return request<Chat>(
+    `/Chat/start?listingId=${listingId}`,
+    {
+      method: "POST",
+    }
+  );
 }
 
-export async function sendMessage(chatId: string, content: string) {
-  await new Promise((r) => setTimeout(r, 300));
-  const newMsg = { id: "m" + Date.now(), chatId, senderId: "u1", content, sentAt: new Date().toISOString() };
-  const chat = mockChats.find((c) => c.id === chatId);
-  if (chat) chat.messages.push(newMsg);
-  return newMsg;
+// =========================
+// OBTENER MENSAJES
+// =========================
+export function getMessages(
+  chatId: string
+) {
+  return request<Message[]>(
+    `/Chat/${chatId}`
+  );
+}
+
+// =========================
+// ENVIAR MENSAJE
+// =========================
+export function sendMessage(
+  chatId: string,
+  content: string
+) {
+  return request<Message>(
+    `/Chat/send?chatId=${chatId}&content=${encodeURIComponent(content)}`,
+    {
+      method: "POST",
+    }
+  );
+}
+
+// =========================
+// OBTENER CHATS
+// =========================
+export function getChats() {
+  return request<Chat[]>(
+    "/Chat"
+  );
 }

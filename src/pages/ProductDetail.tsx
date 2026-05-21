@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getListingById } from "../services/listingsService";
 import { addFavorite } from "../services/favoritesService";
 import { Loader } from "../components/ui/Loader";
 import { ErrorState } from "../components/ui/ErrorState";
+import { startChat } from "../services/chatService";
+
 
 export default function ProductDetail() {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
   const [product, setProduct] = useState<any>(null);
@@ -53,6 +57,23 @@ export default function ProductDetail() {
 
     setFavoriteLoading(false);
   }
+
+  async function handleStartChat() {
+  try {
+
+    const chat =
+      await startChat(product.id);
+
+    navigate(`/chat/${chat.id}`);
+
+  } catch (err) {
+    console.error(err);
+
+    alert(
+      "No se pudo iniciar el chat"
+    );
+  }
+}
 
   if (loading) return <Loader />;
 
@@ -135,26 +156,56 @@ export default function ProductDetail() {
           <strong>Ubicación:</strong>{" "}
           {product.location}
         </p>
+        <p>
+        <strong>Vendedor:</strong>{" "}
+        {product.user?.name}
+      </p>
 
-        {/* Botón favoritos */}
+
+
+
+
+
+        {/* Botones */}
+        <div className="flex gap-4">
+
+          {/* Botón favoritos */}
+          <button
+            onClick={handleAddFavorite}
+            disabled={favoriteLoading}
+            className="
+              bg-red-500
+              hover:bg-red-600
+              disabled:bg-red-300
+              text-white
+              px-5
+              py-2
+              rounded-xl
+              transition
+            "
+          >
+            {favoriteLoading
+              ? "Añadiendo..."
+              : "Añadir a favoritos"}
+          </button>
+
+        {/* Botón iniciar chat */}
         <button
-          onClick={handleAddFavorite}
-          disabled={favoriteLoading}
-          className="
-            bg-red-500
-            hover:bg-red-600
-            disabled:bg-red-300
-            text-white
-            px-5
-            py-2
-            rounded-xl
-            transition
-          "
-        >
-          {favoriteLoading
-            ? "Añadiendo..."
-            : "Añadir a favoritos"}
+            onClick={handleStartChat}
+            className="
+              bg-blue-500
+              hover:bg-blue-600
+              text-white
+              px-5
+              py-2
+              rounded-xl
+              transition
+            "
+          >
+            Iniciar chat
         </button>
+
+      </div>
 
         {/* Mensaje */}
         {favoriteMessage && (
