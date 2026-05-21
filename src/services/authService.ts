@@ -7,12 +7,17 @@ interface LoginData {
 
 interface AuthResponse {
   token: string;
-  user: {
-    id: string;
-    email: string;
-  };
 }
 
+interface MeResponse {
+  userId: string;
+  email?: string;
+  name?: string;
+}
+
+// ======================
+// LOGIN
+// ======================
 export function login(data: LoginData) {
   return request<AuthResponse>("/auth/login", {
     method: "POST",
@@ -20,9 +25,26 @@ export function login(data: LoginData) {
   });
 }
 
+// ======================
+// REGISTER
+// ======================
 export function register(data: LoginData) {
   return request<AuthResponse>("/auth/register", {
     method: "POST",
     body: JSON.stringify(data),
+  });
+}
+
+// ======================
+// GET CURRENT USER
+// ======================
+export function getMe() {
+  const token = localStorage.getItem("token");
+
+  return request<MeResponse>("/auth/me", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 }

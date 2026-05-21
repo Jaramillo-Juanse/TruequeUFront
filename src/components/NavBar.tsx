@@ -36,8 +36,8 @@ function Navbar() {
         </li>
 
         <li>
-          <NavLink to="/chat" style={navLinkStyle}>
-            Chat
+          <NavLink to="/chats" style={navLinkStyle}>
+            Chats
           </NavLink>
         </li>
       </ul>

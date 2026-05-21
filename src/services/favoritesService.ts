@@ -2,17 +2,17 @@ import { request } from "./api";
 import type { Listing } from "../types/types";
 
 export function getFavorites() {
-  return request<Listing[]>("/favorites");
+  return request<Listing[]>("/Favorites");
 }
 
 export function addFavorite(listingId: string) {
-  return request(`/favorites/${listingId}`, {
+  return request(`/Favorites/${listingId}`, {
     method: "POST",
   });
 }
 
 export function removeFavorite(listingId: string) {
-  return request<void>(`/favorites/${listingId}`, {
+  return request<void>(`/Favorites/${listingId}`, {
     method: "DELETE",
   });
 

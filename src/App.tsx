@@ -8,6 +8,7 @@ import Listings from "./pages/Listings";
 import ProductDetail from "./pages/ProductDetail";
 import Favorites from "./pages/Favorites";
 import Chat from "./pages/Chat";
+import ChatsHome from "./pages/ChatsHome";
 import NotFoundPage from "./pages/NotFound";
 import CreateListing from "./pages/CreateListing";
 
@@ -22,7 +23,8 @@ function App(){
           <Route path="/listings" element={<Listings />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/favorites" element={<Favorites />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/chats/" element={<ChatsHome />} />
+          <Route path="/chat/:id" element={<Chat />} />
           <Route path="/publish" element={<CreateListing />} />
           <Route path='*' element={<NotFoundPage></NotFoundPage>}></Route>
         </Route>

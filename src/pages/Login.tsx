@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/authService";
+import { login, getMe } from "../services/authService";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 
@@ -14,19 +14,29 @@ export default function Login() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    if (!email || !password) { setError("Completa todos los campos"); return; }
+
+    if (!email || !password) {
+      setError("Completa todos los campos");
+      return;
+    }
+
     setLoading(true);
+
     try {
+      // 1. LOGIN
       const response = await login({
         email,
         password,
       });
 
-      localStorage.setItem(
-        "token",
-        response.token
-      );
+      localStorage.setItem("token", response.token);
 
+      // 2. GET USER INFO (ME)
+      const me = await getMe();
+
+      localStorage.setItem("userId", me.userId);
+
+      // 3. REDIRECT
       navigate("/listings");
 
     } catch (err) {
@@ -36,12 +46,16 @@ export default function Login() {
         setError("Error al iniciar sesión");
       }
     }
+
     setLoading(false);
   }
 
   return (
     <section className="max-w-sm mx-auto mt-16 p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center">Iniciar sesión</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        Iniciar sesión
+      </h1>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           value={email}
@@ -57,9 +71,7 @@ export default function Login() {
         />
 
         {error && (
-          <p className="text-red-500 text-sm">
-            {error}
-          </p>
+          <p className="text-red-500 text-sm">{error}</p>
         )}
 
         <Button type="submit" disabled={loading}>
